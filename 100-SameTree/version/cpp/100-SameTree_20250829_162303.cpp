@@ -9,24 +9,15 @@
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
- */
+ */missing comment
+
 class Solution {
-    bool dfs(TreeNode* p,TreeNode* q){
-        if(p==NULL && q==NULL){
-            return true;
-        }
-        else if((p!=NULL && q==NULL) || (p==NULL && q!=NULL)){
-            return false;
-        }
-        if(p->val!=q->val){
-            return false;
-        }
-        bool l=dfs(p->left,q->left);
-        bool r=dfs(p->right,q->right);
-        return l && r;
-    }
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        return dfs(p,q);
+        if (!p && !q) return true;
+        if (!p || !q) return false;
+        if (p->val != q->val) return false;
+        
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
 };
